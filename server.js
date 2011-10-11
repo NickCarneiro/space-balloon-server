@@ -13,7 +13,8 @@ var express = require('express'),
 		sys = require('sys'),
 		mime = require('mime'),
 		app = module.exports = express.createServer(),
-		io = require('socket.io').listen(app);
+		io = require('socket.io').listen(app),
+		db = require('mongojs').connect("mongodb://localhost/spaceballoon", ["balloon"]);
 
 /*===========================================================================
 	SETTINGS
@@ -24,6 +25,8 @@ var port = 3011,
 		fancyLog = false,
 		secret = "rip_pimp_c";
 io.set('log level', 1);
+
+
 
 /*===========================================================================
 	DEFAULT CONFIG
@@ -166,6 +169,7 @@ app.get('/fakephone', function(req, res) {
 			io.sockets.emit('phonedata', req.body);
 
 			//TODO: store in mongodb
+			db.balloon.insert(req.body);
 		}
 		res.send("thanks");
 	
