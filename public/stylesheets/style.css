@@ -1,6 +1,26 @@
 html { height: 100% }
 body { height: 100%; margin: 0; padding: 0 }
 #map_canvas { 
-  width: 900px; 
+  width: 70%; 
   height: 600px;
+}
+.center {
+	margin: 0px auto;
+}
+table, th, td {
+	border: 1px solid black;
+}
+#controls{
+	width: 400px;
+}
+.table_container{
+	height: 200px;
+	width: 60%;
+	overflow-y: scroll;
+	margin-bottom: 70px;
+}
+
+h1 {
+	text-align:center;
+	width: 50%;
 }
