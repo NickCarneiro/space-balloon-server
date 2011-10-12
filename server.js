@@ -167,8 +167,7 @@ app.get('/fakephone', function(req, res) {
 		//check secret for correct value
 		if(req.body.secret == secret){
 			io.sockets.emit('phonedata', req.body);
-
-			//TODO: store in mongodb
+			req.body.date = Date.now();
 			db.balloon.insert(req.body);
 		}
 		res.send("thanks");
