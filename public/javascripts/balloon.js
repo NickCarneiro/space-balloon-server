@@ -45,8 +45,8 @@ $(function(){
 
 		balloon.marker.setTitle(data.run_id.toString());
 		//add row to table
-			$("#data_table").find('tbody')
-				.append("<tr><td>" + data.run_id + "</td>" +
+			$("#title_row")
+				.after('<tr><td>' + data.run_id + "</td>" +
 				"<td>" + data.latitude + "</td><td>" + data.longitude + "</td>" +
 				"<td>" + data.altitude + "</td><td>" + data.speed + "</td>" +
 				+ "</tr>"	
