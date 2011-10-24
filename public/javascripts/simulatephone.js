@@ -5,52 +5,25 @@ fakephone.generateData = function(run_id){
 		device_name: "fake_phone",
 		secret:		"rip_pimp_c",
 		time:		(new Date()).getTime(), //time in millis
-		location:	{
-			latitude:		30 + Math.random(),
-			longitude:	-97 - Math.random(),
-			altitude:		489 + Math.random() * 1000,
-			speed:			100 * Math.random()
-		},
-		magnetic_field: {
-			x:		Math.random() * 10,
-			y:		Math.random() * 10,
-			z:		Math.random() * 10
-		},
-		acceleration: {
-			x:		Math.random() * 10,
-			y:		Math.random() * 10,
-			z:		Math.random() * 10
-		},
-		gyroscope: {
-			x:		Math.random() * 10,
-			y:		Math.random() * 10,
-			z:		Math.random() * 10
-		},
-		gravity: {
-			x:		Math.random() * 10,
-			y:		Math.random() * 10,
-			z:		Math.random() * 10
-		},
-		linear_acceleration: {
-			x:		Math.random() * 10,
-			y:		Math.random() * 10,
-			z:		Math.random() * 10
-		},
-		orientation: {
-			x:		Math.random() * 10,
-			y:		Math.random() * 10,
-			z:		Math.random() * 10
-		}
+		
+		latitude:		30 + Math.random(),
+		longitude:	-97 - Math.random(),
+		altitude:		489 + Math.random() * 1000,
+		speed:			100 * Math.random(),
+		
 	};
 
 	$("#fake_data").find('tbody')
 	.append("<tr><td>" + run_id + "</td>" +
-		"<td>" + data.location.latitude + "</td><td>" + data.location.longitude + "</td>" +
-		"<td>" + data.location.altitude + "</td><td>" + data.location.speed + "</td>" +
+		"<td>" + data.latitude + "</td><td>" + data.longitude + "</td>" +
+		"<td>" + data.altitude + "</td><td>" + data.speed + "</td>" +
 		+ "</tr>"	
 	);
 
-	$.post("/data", data, function(res){
+	//Send the data as a json-encoded string in the key "json"
+	//This is ugly, but the easiest way to do it in Java, so I want to stay consistent here.
+	var formdata = {json: JSON.stringify(data)};
+	$.post("/data", formdata, function(res){
 		console.log(res);
 	});
 		

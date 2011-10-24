@@ -24,3 +24,10 @@ h1 {
 	text-align:center;
 	width: 50%;
 }
+
+#center_map {
+	font-size: 30px;
+	height: 50px;
+	width: 300px;
+	margin-bottom: 50px;
+}

@@ -1,7 +1,8 @@
 var balloon = {
 	latest: {
-		latitude: 30.282788,
-		longitude: -97.704163
+		//Downs park baseball diamond
+		latitude: 30.276201,
+		longitude: -97.709334
 	},
 	domain: "http://trillworks.com:3011"
 };
@@ -34,20 +35,20 @@ $(function(){
 	balloon.initialize();
 	var socket = io.connect(balloon.domain);
 	socket.on('phonedata', function (data) {
-		console.log("got data from server");
+		//console.log("got data from server");
 		//move marker
-		balloon.marker.setPosition(new google.maps.LatLng(data.location.latitude, data.location.longitude));
+		balloon.marker.setPosition(new google.maps.LatLng(data.latitude, data.longitude));
 
 		//theoretically a race condition if user centers map between these two lines.
-		balloon.latest.latitude = data.location.latitude;
-		balloon.latest.longitude = data.location.longitude;
+		balloon.latest.latitude = data.latitude;
+		balloon.latest.longitude = data.longitude;
 
-		balloon.marker.setTitle(data.run_id);
+		balloon.marker.setTitle(data.run_id.toString());
 		//add row to table
 			$("#data_table").find('tbody')
 				.append("<tr><td>" + data.run_id + "</td>" +
-				"<td>" + data.location.latitude + "</td><td>" + data.location.longitude + "</td>" +
-				"<td>" + data.location.altitude + "</td><td>" + data.location.speed + "</td>" +
+				"<td>" + data.latitude + "</td><td>" + data.longitude + "</td>" +
+				"<td>" + data.altitude + "</td><td>" + data.speed + "</td>" +
 				+ "</tr>"	
 			);
 	});

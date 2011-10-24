@@ -163,13 +163,17 @@ app.get('/fakephone', function(req, res) {
 	app.post('/data', function(req, res){
 		//console.log("lat: " + req.body.location.latitude + " lon: " + req.body.location.longitude);
 
+		var data = JSON.parse(req.body.json);
+		console.log(data);
 		
 		//check secret for correct value
-		if(req.body.secret == secret){
-			io.sockets.emit('phonedata', req.body);
-			req.body.date = Date.now();
-			db.balloon.insert(req.body);
+		if(data.secret == secret){
+
+			io.sockets.emit('phonedata', data);
+			data.date = Date.now();
+			db.balloon.insert(data);
 		}
+		
 		res.send("thanks");
 	
 });	
