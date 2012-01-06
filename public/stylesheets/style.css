@@ -11,7 +11,7 @@ table, th, td {
 	border: 1px solid black;
 }
 #controls{
-	width: 400px;
+	text-align: center;
 }
 .table_container{
 	height: 200px;
@@ -25,7 +25,8 @@ h1 {
 	width: 50%;
 }
 
-#center_map {
+button{
+	display: inline;
 	font-size: 30px;
 	height: 50px;
 	width: 300px;

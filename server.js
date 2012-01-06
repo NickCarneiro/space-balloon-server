@@ -160,6 +160,21 @@ app.get('/fakephone', function(req, res) {
 				"javascripts/simulatephone.js"]
 	});
 });
+
+app.get('/recentdata', function(req, res) {
+	var json = db.balloon.find({}).sort({time: -1}).limit(1, function(err, docs){
+		io.sockets.emit('phonedata', docs[0]);
+		res.send(docs);
+	});
+
+app.get('/alldata', function(req, res) {
+	var json = db.balloon.find({}, function(err, docs){
+		res.send(docs);
+	});
+});
+	
+	
+});
 	app.post('/data', function(req, res){
 		//console.log("lat: " + req.body.location.latitude + " lon: " + req.body.location.longitude);
 
@@ -168,15 +183,15 @@ app.get('/fakephone', function(req, res) {
 		
 		//check secret for correct value
 		if(data.secret == secret){
-
+			console.log("data valid. Emitting event.")
 			io.sockets.emit('phonedata', data);
 			data.date = Date.now();
 			db.balloon.insert(data);
 		}
-		
 		res.send("thanks");
-	
 });	
+
+
 
 
 
